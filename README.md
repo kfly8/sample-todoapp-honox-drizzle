@@ -1,3 +1,5 @@
+[![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+
 ## What is this?
 
 This project is a sample project to try these stack:
@@ -13,9 +15,15 @@ This project is a sample project to try these stack:
     - [Bun test](https://bun.sh/docs/cli/test)
 - Runtime
     - [Bun](https://bun.sh/)
-- misc
+- Development tool
     - [Vite](https://vite.dev/)
     - [Biome](https://biomejs.dev/)
+        - code formatter, linter
+    - [lefthook](https://github.com/evilmartians/lefthook)
+        - commit hook to run biome
+- misc
+    - [neverthrow](https://github.com/supermacro/neverthrow)
+        - Result type for TypeScript / To Handle expected errors
 
 ## Setup
 
