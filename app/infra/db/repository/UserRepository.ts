@@ -1,19 +1,19 @@
-import { ok } from 'neverthrow'
-import type { LibSQLDatabase } from 'drizzle-orm/libsql';
-import { users, createUserId } from '../schema'
+import type { LibSQLDatabase } from "drizzle-orm/libsql";
+import { ok } from "neverthrow";
+import { createUserId, users } from "../schema";
 
-type UserInsert = Pick<typeof users.$inferInsert, 'name'>
+type UserInsert = Pick<typeof users.$inferInsert, "name">;
 
-export class UserRepository  {
-  #db: LibSQLDatabase
+export class UserRepository {
+	#db: LibSQLDatabase;
 
-  constructor(db: LibSQLDatabase) {
-    this.#db = db
-  }
+	constructor(db: LibSQLDatabase) {
+		this.#db = db;
+	}
 
-  async createUser(data: UserInsert) {
-    const values = { ...data, id: createUserId() }
-    const user = await this.#db.insert(users).values(values).returning().get()
-    return ok(user)
-  }
+	async createUser(data: UserInsert) {
+		const values = { ...data, id: createUserId() };
+		const user = await this.#db.insert(users).values(values).returning().get();
+		return ok(user);
+	}
 }
