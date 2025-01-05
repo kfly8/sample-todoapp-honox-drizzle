@@ -6,9 +6,14 @@ import { UserRepository } from "../infra/db/repository/UserRepository";
 
 type CreateUserParams = Partial<Parameters<UserRepository["createUser"]>[0]>;
 
-export const createUser = async (args: CreateUserParams = {}) => {
+const db = () => {
+	// biome-ignore lint/style/noNonNullAssertion: ignore
 	const db = drizzle(process.env.DATABASE_URL!);
-	const userRepo = new UserRepository(db);
+	return db;
+};
+
+export const createUser = async (args: CreateUserParams = {}) => {
+	const userRepo = new UserRepository(db());
 
 	const data = {
 		name: args.name ?? faker.person.fullName(),
@@ -26,8 +31,7 @@ export const createUser = async (args: CreateUserParams = {}) => {
 type CreateTodoParams = Partial<Parameters<TodoRepository["createTodo"]>[0]>;
 
 export const createTodo = async (args: CreateTodoParams = {}) => {
-	const db = drizzle(process.env.DATABASE_URL!);
-	const todoRepo = new TodoRepository(db);
+	const todoRepo = new TodoRepository(db());
 
 	const user = await createUser();
 

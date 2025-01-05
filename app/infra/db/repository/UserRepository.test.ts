@@ -5,6 +5,7 @@ import { ok } from "neverthrow";
 import { UserRepository } from "./UserRepository";
 
 const createUserRepository = () => {
+	// biome-ignore lint/style/noNonNullAssertion: ignore
 	const db = drizzle(process.env.DATABASE_URL!);
 	const userRepo = new UserRepository(db);
 	return userRepo;

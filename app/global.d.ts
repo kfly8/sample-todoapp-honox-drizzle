@@ -6,7 +6,9 @@ type Head = {
 
 declare module "hono" {
 	interface Env {
+		// biome-ignore lint/complexity/noBannedTypes: TODO
 		Variables: {};
+		// biome-ignore lint/complexity/noBannedTypes: TODO
 		Bindings: {};
 	}
 	type ContextRenderer = (

@@ -7,6 +7,7 @@ import type { TodoId } from "../schema";
 import { TodoRepository } from "./TodoRepository";
 
 const createTodoRepository = () => {
+	// biome-ignore lint/style/noNonNullAssertion: ignore
 	const db = drizzle(process.env.DATABASE_URL!);
 	const todoRepo = new TodoRepository(db);
 	return todoRepo;
