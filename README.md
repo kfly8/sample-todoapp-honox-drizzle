@@ -2,14 +2,20 @@
 
 This project is a sample project to try these stack:
 
-- [x] [hono](https://hono.dev/)
-- [x] [honox](https://github.com/honojs/honox)
-- [x] [drizzle](https://orm.drizzle.team/)
-- [x] [Zod](https://zod.dev/)
-- [x] [Vite](https://vite.dev/)
-- [x] [Vitest](https://vitest.dev/)
-- [x] [Biome](https://biomejs.dev/)
-- [x] [Bun](https://bun.sh/)
+- Web application framework
+    - [Hono](https://hono.dev/) + [honox](https://github.com/honojs/honox)
+- Database
+    - [SQLite](https://www.sqlite.org/)
+    - [drizzle](https://orm.drizzle.team/)
+- Validation
+    - [Zod](https://zod.dev/)
+- Test
+    - [Bun test](https://bun.sh/docs/cli/test)
+- Runtime
+    - [Bun](https://bun.sh/)
+- misc
+    - [Vite](https://vite.dev/)
+    - [Biome](https://biomejs.dev/)
 
 ## Setup
 
