@@ -17,6 +17,7 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@cloudflare/workers-types": "^4.20241218.0",
     "@faker-js/faker": "^9.3.0",
     "@hono/vite-build": "^1.2.0",
