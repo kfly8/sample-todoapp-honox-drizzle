@@ -1,2 +1,6 @@
 [install.lockfile]
 print = "yarn"
+
+[test]
+coverageThreshold = 0.9
+coverageReporter  = ["text", "lcov"]

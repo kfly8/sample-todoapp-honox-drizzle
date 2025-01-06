@@ -5,7 +5,10 @@
 		"dev": "vite",
 		"build": "vite build --mode client && vite build",
 		"preview": "wrangler pages dev",
-		"deploy": "bun run build && wrangler pages deploy"
+		"deploy": "bun run build && wrangler pages deploy",
+		"test": "bun test",
+		"coverage": "bun test --coverage",
+		"check": "bunx biome check --write"
 	},
 	"private": true,
 	"dependencies": {

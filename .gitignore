@@ -35,3 +35,6 @@ lerna-debug.log*
 
 # SQLite
 *.db
+
+# test
+coverage/
