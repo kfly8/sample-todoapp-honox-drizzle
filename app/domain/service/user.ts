@@ -1,6 +1,6 @@
 import { err, ok } from "neverthrow";
-import { createUserId, userSchema } from "../model";
-import type { User } from "../model";
+import { createUserId, userSchema } from "../model/user";
+import type { User } from "../model/user";
 
 export type Params = Omit<User, "id">;
 

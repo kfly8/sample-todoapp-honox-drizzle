@@ -1,7 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { ok } from "neverthrow";
 import type { ZodError } from "zod";
-import { signUp } from "./signUp";
+
+import { signUp } from "./user";
 
 describe("signUp", async () => {
 	test("When valid user is given, then ok", async () => {

@@ -1,6 +1,6 @@
 import { err, ok } from "neverthrow";
-import { createTodoId, todoSchema } from "../model";
-import type { Todo } from "../model";
+import { createTodoId, todoSchema } from "../model/todo";
+import type { Todo } from "../model/todo";
 
 export type Params = Omit<Todo, "id">;
 
