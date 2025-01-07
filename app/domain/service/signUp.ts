@@ -1,22 +1,18 @@
 import { err, ok } from "neverthrow";
-import { userSchema } from "../model";
-import { createUserId } from "../model";
-import type { UserRepository } from "../repository";
+import { createUserId, userSchema } from "../model";
+import type { User } from "../model";
 
-export function signUp(repo: UserRepository, name: string) {
+export type Params = Omit<User, "id">;
+
+export function signUp(params: Params) {
 	const user = {
+		...params,
 		id: createUserId(),
-		name,
 	};
 
 	const parsed = userSchema.safeParse(user);
 	if (parsed.error) {
 		return err(parsed.error);
-	}
-
-	const saved = repo.save(parsed.data);
-	if (saved.isErr()) {
-		return err(saved.error);
 	}
 
 	return ok(parsed.data);
