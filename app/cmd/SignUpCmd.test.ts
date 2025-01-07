@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { err, ok } from "neverthrow";
 import type { User } from "../domain/model/user";
+import type { UserRepository } from "../repository";
 
-import type { UserRepository } from "./SignUpCmd";
 import { SignUpCmd } from "./SignUpCmd";
 
 class TestUserRepository implements UserRepository {

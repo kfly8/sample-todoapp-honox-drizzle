@@ -1,12 +1,7 @@
 import { err, ok } from "neverthrow";
-import type { Result } from "neverthrow";
-import type { Todo } from "../domain/model/todo";
 import { createTodo } from "../domain/service/todo";
 import type { Params } from "../domain/service/todo";
-
-export interface TodoRepository {
-	save(params: Todo): Promise<Result<null, Error>>;
-}
+import type { TodoRepository } from "../repository";
 
 export class CreateTodoCmd {
 	constructor(private repo: TodoRepository) {

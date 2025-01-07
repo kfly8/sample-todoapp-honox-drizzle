@@ -1,12 +1,7 @@
 import { err, ok } from "neverthrow";
-import type { Result } from "neverthrow";
-import type { User } from "../domain/model/user";
 import { signUp } from "../domain/service/user";
 import type { Params } from "../domain/service/user";
-
-export interface UserRepository {
-	save(params: User): Promise<Result<null, Error>>;
-}
+import type { UserRepository } from "../repository";
 
 export class SignUpCmd {
 	constructor(private repo: UserRepository) {
