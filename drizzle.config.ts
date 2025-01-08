@@ -1,8 +1,8 @@
 import type { Config } from "drizzle-kit";
 
 export default {
-	schema: "app/infra/db/schema.ts",
-	out: "app/infra/db/migrations",
+	schema: "app/infra/schema.ts",
+	out: "app/infra/migrations",
 	dialect: "sqlite",
 	dbCredentials: {
 		// biome-ignore lint/style/noNonNullAssertion: ignore
