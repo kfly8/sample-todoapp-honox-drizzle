@@ -5,4 +5,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	plugins: [honox({ devServer: { adapter } }), build()],
+	resolve: {
+		alias: {
+			"@/": "/app/",
+		},
+	},
 });

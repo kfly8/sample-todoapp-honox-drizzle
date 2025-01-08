@@ -1,9 +1,9 @@
 import { zValidator as zv } from "@hono/zod-validator";
 import { createRoute } from "honox/factory";
 
-import { SignUpCmd } from "../../cmd/SignUpCmd";
-import { userSchema } from "../../domain/user";
-import { newSignUpRepository } from "../../infra";
+import { SignUpCmd } from "@/cmd/SignUpCmd";
+import { userSchema } from "@/domain/user";
+import { newSignUpRepository } from "@/infra";
 
 const signUpRepo = newSignUpRepository();
 const signUpCmd = new SignUpCmd(signUpRepo);
