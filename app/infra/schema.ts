@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { sqliteTable as table } from "drizzle-orm/sqlite-core";
 import * as t from "drizzle-orm/sqlite-core";
-import { ulid } from "ulid";
+import { generateId } from "../utils";
 
 import type { TodoId } from "../domain/todo";
 import type { UserId } from "../domain/user";
@@ -34,7 +34,7 @@ export const users = table("users", {
 });
 
 export const todoAssignees = table("todo_assignees", {
-	id: t.text().notNull().primaryKey().$defaultFn(ulid),
+	id: t.text().notNull().primaryKey().$defaultFn(generateId),
 	todoId: t
 		.text()
 		.notNull()

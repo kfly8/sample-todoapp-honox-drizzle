@@ -1,9 +1,9 @@
-import { ulid } from "ulid";
 import { z } from "zod";
+import { generateId } from "../utils";
 
-export const userIdSchema = z.string().ulid().brand<"UserId">();
+export const userIdSchema = z.string().brand<"UserId">();
 export type UserId = z.infer<typeof userIdSchema>;
-export const createUserId = () => ulid() as UserId;
+export const createUserId = () => generateId() as UserId;
 
 export const userSchema = z.object({
 	id: userIdSchema,

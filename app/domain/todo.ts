@@ -1,11 +1,11 @@
-import { ulid } from "ulid";
 import { z } from "zod";
+import { generateId } from "../utils";
 
 import { userIdSchema } from "./user";
 
-export const todoIdSchema = z.string().ulid().brand<"TodoId">();
+export const todoIdSchema = z.string().brand<"TodoId">();
 export type TodoId = z.infer<typeof todoIdSchema>;
-export const createTodoId = () => ulid() as TodoId;
+export const createTodoId = () => generateId() as TodoId;
 
 export const todoSchema = z.object({
 	id: todoIdSchema,

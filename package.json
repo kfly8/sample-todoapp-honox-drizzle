@@ -17,8 +17,7 @@
 		"drizzle-orm": "^0.38.3",
 		"hono": "^4.6.15",
 		"honox": "^0.1.27",
-		"neverthrow": "^8.1.1",
-		"ulid": "^2.3.0"
+		"neverthrow": "^8.1.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
