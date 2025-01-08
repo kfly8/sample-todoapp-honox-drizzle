@@ -1,8 +1,8 @@
 import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
-import type { Todo } from "../domain/model/todo";
-import { createTodo } from "../domain/service/todo";
-import type { Params } from "../domain/service/todo";
+import type { Todo } from "../domain/todo";
+import { createTodo } from "../domain/todoService";
+import type { Params } from "../domain/todoService";
 
 export interface Repository {
 	save(params: Todo): Promise<Result<null, Error>>;

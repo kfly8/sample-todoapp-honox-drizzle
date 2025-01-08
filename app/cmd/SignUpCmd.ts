@@ -1,8 +1,8 @@
 import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
-import type { User } from "../domain/model/user";
-import { signUp } from "../domain/service/user";
-import type { Params } from "../domain/service/user";
+import type { User } from "../domain/user";
+import { signUp } from "../domain/userService";
+import type { Params } from "../domain/userService";
 
 export interface Repository {
 	save(params: User): Promise<Result<null, Error>>;

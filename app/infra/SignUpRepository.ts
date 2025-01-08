@@ -1,7 +1,7 @@
 import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
-import type { User } from "../domain/model/user";
+import type { User } from "../domain/user";
 import { users } from "./schema";
 
 import type { Repository } from "../cmd/SignUpCmd";

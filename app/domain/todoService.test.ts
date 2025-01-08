@@ -2,8 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { ok } from "neverthrow";
 import type { ZodError } from "zod";
 
-import { createUserId } from "../model/user";
-import { createTodo } from "./todo";
+import { createTodo } from "./todoService";
+import { createUserId } from "./user";
 
 describe("createTodo", async () => {
 	const userId = createUserId();

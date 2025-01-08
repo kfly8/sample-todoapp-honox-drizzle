@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
-import type { Todo } from "../domain/model/todo";
+import type { Todo } from "../domain/todo";
 import { todoAssignees, todos } from "./schema";
 
 import type { Repository } from "../cmd/CreateTodoCmd";

@@ -6,8 +6,8 @@ export const createDrizzle = () => {
 	return drizzle(process.env.DATABASE_URL!);
 };
 
-import { createUserId } from "../domain/model/user";
-import type { User } from "../domain/model/user";
+import { createUserId } from "../domain/user";
+import type { User } from "../domain/user";
 import { SignUpRepository } from "../infra/SignUpRepository";
 
 export const buildFakeUser = (params: Partial<User> = {}) => {
@@ -29,8 +29,8 @@ export const createFakeUser = async (params: Partial<User> = {}) => {
 	return user;
 };
 
-import { createTodoId } from "../domain/model/todo";
-import type { Todo } from "../domain/model/todo";
+import { createTodoId } from "../domain/todo";
+import type { Todo } from "../domain/todo";
 import { CreateTodoRepository } from "../infra/CreateTodoRepository";
 
 export const buildFakeTodo = (params: Partial<Todo> = {}) => {

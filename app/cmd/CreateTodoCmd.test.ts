@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { err, ok } from "neverthrow";
-import type { Todo } from "../domain/model/todo";
-import { createUserId } from "../domain/model/user";
+import type { Todo } from "../domain/todo";
+import { createUserId } from "../domain/user";
 
 import type { Repository } from "./CreateTodoCmd";
 import { CreateTodoCmd } from "./CreateTodoCmd";
