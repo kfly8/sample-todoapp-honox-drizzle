@@ -1,15 +1,14 @@
 import { describe, expect, test } from "bun:test";
 import { err, ok } from "neverthrow";
-import type { Todo } from "../domain/todo";
 import { createUserId } from "../domain/user";
 
-import type { Repository } from "./CreateTodoCmd";
+import type { Repository, RepositoryParams } from "./CreateTodoCmd";
 import { CreateTodoCmd } from "./CreateTodoCmd";
 
 class TestRepository implements Repository {
-	private storage: Todo[] = [];
-	async save(todo: Todo) {
-		this.storage.push(todo);
+	private storage: RepositoryParams[] = [];
+	async save(params: RepositoryParams) {
+		this.storage.push(params);
 		return ok(null);
 	}
 	async getLatest() {
@@ -40,7 +39,7 @@ describe("CreateTodoCmd.execute", async () => {
 		const result = await cmd.execute(todo);
 
 		expect(result).toEqual(ok(expected));
-		expect(await repo.getLatest()).toEqual(expected);
+		expect(await repo.getLatest()).toEqual({ todo: expected });
 	});
 
 	test("When given invalid todo params, then it should return an error", async () => {

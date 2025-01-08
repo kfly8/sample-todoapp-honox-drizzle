@@ -4,8 +4,12 @@ import type { User } from "../domain/user";
 import { signUp } from "../domain/userService";
 import type { Params } from "../domain/userService";
 
+export type RepositoryParams = {
+	user: User;
+};
+
 export interface Repository {
-	save(params: User): Promise<Result<null, Error>>;
+	save(params: RepositoryParams): Promise<Result<null, Error>>;
 }
 
 export class SignUpCmd {
@@ -20,7 +24,7 @@ export class SignUpCmd {
 		}
 		const user = result.value;
 
-		const saved = await this.repo.save(user);
+		const saved = await this.repo.save({ user });
 		if (saved.isErr()) {
 			return err(new Error("Failed to save user", { cause: saved.error }));
 		}

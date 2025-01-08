@@ -1,10 +1,9 @@
 import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
-import type { User } from "../domain/user";
 import { users } from "./schema";
 
-import type { Repository } from "../cmd/SignUpCmd";
+import type { Repository, RepositoryParams } from "../cmd/SignUpCmd";
 
 export class SignUpRepository implements Repository {
 	#db: LibSQLDatabase;
@@ -13,8 +12,8 @@ export class SignUpRepository implements Repository {
 		this.#db = db;
 	}
 
-	async save(params: User) {
-		await this.#db.insert(users).values(params);
+	async save({ user }: RepositoryParams) {
+		await this.#db.insert(users).values(user);
 
 		return ok(null);
 	}

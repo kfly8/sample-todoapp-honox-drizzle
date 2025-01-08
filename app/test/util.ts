@@ -24,7 +24,7 @@ export const createFakeUser = async (params: Partial<User> = {}) => {
 	const db = createDrizzle();
 	const repo = new SignUpRepository(db);
 
-	await repo.save(user);
+	await repo.save({ user });
 
 	return user;
 };
@@ -51,7 +51,7 @@ export const createFakeTodo = async (params: Partial<Todo> = {}) => {
 	const db = createDrizzle();
 	const repo = new CreateTodoRepository(db);
 
-	await repo.save(todo);
+	await repo.save({ todo });
 
 	return todo;
 };

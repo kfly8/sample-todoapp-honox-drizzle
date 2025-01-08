@@ -2,10 +2,11 @@ import { eq } from "drizzle-orm";
 import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
-import type { Todo } from "../domain/todo";
 import { todoAssignees, todos } from "./schema";
 
-import type { Repository } from "../cmd/CreateTodoCmd";
+import type { Repository, RepositoryParams } from "../cmd/CreateTodoCmd";
+
+type Todo = RepositoryParams["todo"];
 
 export class CreateTodoRepository implements Repository {
 	#db: LibSQLDatabase;
@@ -14,11 +15,11 @@ export class CreateTodoRepository implements Repository {
 		this.#db = db;
 	}
 
-	async save(params: Todo) {
-		const { id, assigneeIds, ...todo } = params;
+	async save({ todo }: RepositoryParams) {
+		const { id, assigneeIds, ...rest } = todo;
 
 		// TODO: txn
-		await this.#db.insert(todos).values({ id, ...todo });
+		await this.#db.insert(todos).values({ id, ...rest });
 		await this.saveTodoAssignees(id, assigneeIds);
 
 		return ok(null);

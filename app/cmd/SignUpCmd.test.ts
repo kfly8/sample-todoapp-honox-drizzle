@@ -1,14 +1,13 @@
 import { describe, expect, test } from "bun:test";
 import { err, ok } from "neverthrow";
-import type { User } from "../domain/user";
 
-import type { Repository } from "./SignUpCmd";
+import type { Repository, RepositoryParams } from "./SignUpCmd";
 import { SignUpCmd } from "./SignUpCmd";
 
 class TestRepository implements Repository {
-	private storage: User[] = [];
-	async save(user: User) {
-		this.storage.push(user);
+	private storage: RepositoryParams[] = [];
+	async save(params: RepositoryParams) {
+		this.storage.push(params);
 		return ok(null);
 	}
 	async getLatest() {
@@ -33,7 +32,7 @@ describe("SignUpCmd.execute", async () => {
 		const result = await cmd.execute(user);
 
 		expect(result).toEqual(ok(expected));
-		expect(await repo.getLatest()).toEqual(expected);
+		expect(await repo.getLatest()).toEqual({ user: expected });
 	});
 
 	test("When given invalid params, then it should return an error", async () => {

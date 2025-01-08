@@ -14,7 +14,7 @@ describe("SignUpRepository.save", async () => {
 	test("When given valid user params, then it should create a user and save", async () => {
 		const user = buildFakeUser();
 
-		const result = await repo.save(user);
+		const result = await repo.save({ user });
 		expect(result).toEqual(ok(null));
 
 		const got = await db

@@ -15,7 +15,7 @@ describe("save", async () => {
 		const user = await createFakeUser();
 		const todo = buildFakeTodo({ authorId: user.id });
 
-		const result = await repo.save(todo);
+		const result = await repo.save({ todo });
 		expect(result).toEqual(ok(null));
 
 		const todoRow = await db
