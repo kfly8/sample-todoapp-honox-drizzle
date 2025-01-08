@@ -43,7 +43,11 @@ bun install
 ### Database setup
 
 ```bash
-bunx drizzle-kit migrate
+# for development
+bunx --bun drizzle-kit migrate
+
+# for test
+env NODE_ENV=test bunx --bun drizzle-kit migrate
 ```
 
 ### Start the development server
