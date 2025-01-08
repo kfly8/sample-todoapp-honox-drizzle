@@ -4,12 +4,12 @@ import type { Todo } from "../domain/model/todo";
 import { createTodo } from "../domain/service/todo";
 import type { Params } from "../domain/service/todo";
 
-export interface TodoRepository {
+export interface Repository {
 	save(params: Todo): Promise<Result<null, Error>>;
 }
 
 export class CreateTodoCmd {
-	constructor(private repo: TodoRepository) {
+	constructor(private repo: Repository) {
 		this.repo = repo;
 	}
 

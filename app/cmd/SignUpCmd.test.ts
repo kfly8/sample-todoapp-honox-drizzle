@@ -2,10 +2,10 @@ import { describe, expect, test } from "bun:test";
 import { err, ok } from "neverthrow";
 import type { User } from "../domain/model/user";
 
-import type { UserRepository } from "./SignUpCmd";
+import type { Repository } from "./SignUpCmd";
 import { SignUpCmd } from "./SignUpCmd";
 
-class TestUserRepository implements UserRepository {
+class TestRepository implements Repository {
 	private storage: User[] = [];
 	async save(user: User) {
 		this.storage.push(user);
@@ -16,8 +16,8 @@ class TestUserRepository implements UserRepository {
 	}
 }
 
-describe("SignUpCmd", async () => {
-	const repo = new TestUserRepository();
+describe("SignUpCmd.execute", async () => {
+	const repo = new TestRepository();
 	const cmd = new SignUpCmd(repo);
 
 	test("When given valid params, then it should create a user and save", async () => {

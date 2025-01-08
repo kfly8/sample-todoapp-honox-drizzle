@@ -4,12 +4,12 @@ import type { User } from "../domain/model/user";
 import { signUp } from "../domain/service/user";
 import type { Params } from "../domain/service/user";
 
-export interface UserRepository {
+export interface Repository {
 	save(params: User): Promise<Result<null, Error>>;
 }
 
 export class SignUpCmd {
-	constructor(private repo: UserRepository) {
+	constructor(private repo: Repository) {
 		this.repo = repo;
 	}
 

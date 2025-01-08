@@ -3,10 +3,10 @@ import { err, ok } from "neverthrow";
 import type { Todo } from "../domain/model/todo";
 import { createUserId } from "../domain/model/user";
 
-import type { TodoRepository } from "./CreateTodoCmd";
+import type { Repository } from "./CreateTodoCmd";
 import { CreateTodoCmd } from "./CreateTodoCmd";
 
-class TestTodoRepository implements TodoRepository {
+class TestRepository implements Repository {
 	private storage: Todo[] = [];
 	async save(todo: Todo) {
 		this.storage.push(todo);
@@ -17,8 +17,8 @@ class TestTodoRepository implements TodoRepository {
 	}
 }
 
-describe("CreateTodoCmd", async () => {
-	const repo = new TestTodoRepository();
+describe("CreateTodoCmd.execute", async () => {
+	const repo = new TestRepository();
 	const cmd = new CreateTodoCmd(repo);
 
 	test("When given valid todo params, then it should create a todo and save", async () => {

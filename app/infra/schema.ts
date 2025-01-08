@@ -3,8 +3,8 @@ import { sqliteTable as table } from "drizzle-orm/sqlite-core";
 import * as t from "drizzle-orm/sqlite-core";
 import { ulid } from "ulid";
 
-import type { TodoId } from "../../domain/model/todo";
-import type { UserId } from "../../domain/model/user";
+import type { TodoId } from "../domain/model/todo";
+import type { UserId } from "../domain/model/user";
 
 // utils
 const createdAt = t.text("created_at").default(sql`(CURRENT_TIMESTAMP)`);
