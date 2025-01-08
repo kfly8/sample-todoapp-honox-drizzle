@@ -3,7 +3,7 @@ import { err, ok } from "neverthrow";
 import type { Todo } from "../domain/model/todo";
 import { createUserId } from "../domain/model/user";
 
-import type { TodoRepository } from "../repository";
+import type { TodoRepository } from "./CreateTodoCmd";
 import { CreateTodoCmd } from "./CreateTodoCmd";
 
 class TestTodoRepository implements TodoRepository {
