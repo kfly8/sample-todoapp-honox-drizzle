@@ -12,6 +12,7 @@
 	},
 	"private": true,
 	"dependencies": {
+		"@hono/zod-validator": "^0.4.2",
 		"@libsql/client": "^0.14.0",
 		"drizzle-orm": "^0.38.3",
 		"hono": "^4.6.15",
