@@ -32,13 +32,12 @@ export class CreateTodoRepository implements Repository {
 			return;
 		}
 
-		const assignees = assigneeIds.map((assigneeId) => ({ todoId, assigneeId }));
+		const assignees = assigneeIds.map((userId) => ({ todoId, userId }));
 
 		await this.#db
 			.delete(todoAssignees)
 			.where(eq(todoAssignees.todoId, todoId));
 		for (const assignee of assignees) {
-			// TODO: No overload matches this call.
 			await this.#db.insert(todoAssignees).values(assignee);
 		}
 	}
