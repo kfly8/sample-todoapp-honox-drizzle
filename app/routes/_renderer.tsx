@@ -10,7 +10,11 @@ export default jsxRenderer(({ children, title }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<title>{title}</title>
 				<link rel="icon" href="/favicon.ico" />
-				<Script src="/app/client.ts" async />
+				{import.meta.env.PROD ? (
+					<script type="module" src="/static/client.js" />
+				) : (
+					<Script src="/app/client.ts" async />
+				)}
 				<Style />
 			</head>
 			<body>{children}</body>
