@@ -1,16 +1,11 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from "drizzle-orm/bun-sqlite";
+import { drizzle } from "drizzle-orm/libsql";
 
 import { CreateTodoRepository } from "./CreateTodoRepository";
 import { SignUpRepository } from "./SignUpRepository";
 
-export const createSqlite = () => {
+const createDrizzle = () => {
 	// biome-ignore lint/style/noNonNullAssertion: ignore
-	return new Database(process.env.DATABASE_URL!);
-};
-
-export const createDrizzle = () => {
-	return drizzle({ client: createSqlite() });
+	return drizzle(process.env.DATABASE_URL!);
 };
 
 export const newSignUpRepository = () => {

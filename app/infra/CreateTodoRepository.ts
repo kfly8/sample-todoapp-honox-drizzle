@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
+import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
 import { todoAssignees, todos } from "./schema";
@@ -9,9 +9,9 @@ import type { Repository, RepositoryParams } from "../cmd/CreateTodoCmd";
 type Todo = RepositoryParams["todo"];
 
 export class CreateTodoRepository implements Repository {
-	#db: BunSQLiteDatabase;
+	#db: LibSQLDatabase;
 
-	constructor(db: BunSQLiteDatabase) {
+	constructor(db: LibSQLDatabase) {
 		this.#db = db;
 	}
 

@@ -1,4 +1,4 @@
-import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
+import type { LibSQLDatabase } from "drizzle-orm/libsql";
 import { ok } from "neverthrow";
 
 import { users } from "./schema";
@@ -6,9 +6,9 @@ import { users } from "./schema";
 import type { Repository, RepositoryParams } from "../cmd/SignUpCmd";
 
 export class SignUpRepository implements Repository {
-	#db: BunSQLiteDatabase;
+	#db: LibSQLDatabase;
 
-	constructor(db: BunSQLiteDatabase) {
+	constructor(db: LibSQLDatabase) {
 		this.#db = db;
 	}
 
