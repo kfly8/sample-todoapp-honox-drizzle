@@ -2,10 +2,7 @@
 	"name": "basic",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build --mode client && vite build",
-		"preview": "wrangler pages dev",
-		"deploy": "bun run build && wrangler pages deploy",
+		"dev": "bun --bun vite",
 		"test": "bun test",
 		"coverage": "bun test --coverage",
 		"check": "bunx biome check --write"
@@ -17,8 +14,7 @@
 		"drizzle-orm": "^0.38.3",
 		"hono": "^4.6.15",
 		"honox": "^0.1.27",
-		"neverthrow": "^8.1.1",
-		"uuid": "^11.0.4"
+		"neverthrow": "^8.1.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",

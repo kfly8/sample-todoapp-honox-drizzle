@@ -5,6 +5,13 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	plugins: [honox({ devServer: { adapter } }), build()],
+	build: {
+		rollupOptions: {
+			commonjsOptions: {
+				transformMixedEsModules: true,
+			},
+		},
+	},
 	resolve: {
 		alias: {
 			"@/": "/app/",
