@@ -3,6 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "bun --bun vite",
+		"build": "bunx vite build --mode client && bunx --bun vite build",
 		"test": "bun test",
 		"coverage": "bun test --coverage",
 		"check": "bunx biome check --write"
