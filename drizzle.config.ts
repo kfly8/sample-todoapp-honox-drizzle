@@ -6,6 +6,6 @@ export default {
 	dialect: "sqlite",
 	dbCredentials: {
 		// biome-ignore lint/style/noNonNullAssertion: ignore
-		url: process.env.DATABASE_URL!,
+		url: import.meta.env.VITE_DATABASE_URL!,
 	},
 } satisfies Config;

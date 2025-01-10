@@ -6,7 +6,7 @@ import { SignUpRepository } from "./SignUpRepository";
 
 export const createDatabase = () => {
 	// biome-ignore lint/style/noNonNullAssertion: ignore
-	return new Database(process.env.DATABASE_URL!);
+	return new Database(import.meta.env.VITE_DATABASE_URL!);
 };
 
 export const createDrizzle = () => {
