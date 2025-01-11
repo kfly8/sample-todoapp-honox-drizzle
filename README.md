@@ -19,8 +19,8 @@ This project is a sample project to try these stack:
     - [Vite](https://vite.dev/)
     - [Biome](https://biomejs.dev/)
         - code formatter, linter
-    - [lefthook](https://github.com/evilmartians/lefthook)
-        - commit hook to run biome
+    - [pre-commit](https://pre-commit.com/)
+        - pre-commit manager to run biome
 - misc
     - [neverthrow](https://github.com/supermacro/neverthrow)
         - Result type for TypeScript / To Handle expected errors

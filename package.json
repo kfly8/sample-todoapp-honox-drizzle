@@ -24,7 +24,6 @@
 		"@libsql/client": "^0.14.0",
 		"@types/bun": "^1.1.14",
 		"drizzle-kit": "^0.30.1",
-		"lefthook": "^1.10.1",
 		"vite": "^5.2.12"
 	}
 }

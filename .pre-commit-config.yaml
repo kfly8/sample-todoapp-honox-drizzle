@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: local-biome-check
+        name: biome check
+        entry: bunx biome check --write --files-ignore-unknown=true --no-errors-on-unmatched
+        language: system
+        types: [text]
+        files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|css|svelte|vue|astro|graphql|gql)$"
