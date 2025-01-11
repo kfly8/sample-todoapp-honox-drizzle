@@ -11,8 +11,11 @@ declare module "hono" {
 		// biome-ignore lint/complexity/noBannedTypes: TODO
 		Bindings: {};
 	}
-	type ContextRenderer = (
-		content: string | Promise<string>,
-		head?: Head,
-	) => Response | Promise<Response>;
+	interface ContextRenderer {
+		// biome-ignore lint/style/useShorthandFunctionType: この整形をすると別の型エラーが発生した為、無視
+		(
+			content: string | Promise<string>,
+			head?: Head,
+		): Response | Promise<Response>;
+	}
 }

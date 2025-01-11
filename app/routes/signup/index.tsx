@@ -18,7 +18,5 @@ export const POST = createRoute(zv("json", postRequest), async (c) => {
 		return c.json({ message: result.error.message }, 500);
 	}
 
-	if (result.isOk()) {
-		return c.json(result.value, 201);
-	}
+	return c.json(result.value, 201);
 });
