@@ -25,7 +25,8 @@ ENV NODE_ENV=production
 RUN bun run build
 RUN bunx --bun drizzle-kit migrate
 
-FROM base AS release
+FROM oven/bun:1-alpine AS release
+
 COPY --chown=bun:bun --from=install /temp/prod/node_modules node_modules
 COPY --chown=bun:bun --from=prerelease /usr/src/app/dist .
 COPY --chown=bun:bun --from=prerelease /var/lib/todoapp/ /var/lib/todoapp/
