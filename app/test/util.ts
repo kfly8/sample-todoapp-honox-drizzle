@@ -1,10 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { drizzle } from "drizzle-orm/libsql";
+import { createDrizzle } from "../infra";
 
-export const createDrizzle = () => {
-	// biome-ignore lint/style/noNonNullAssertion: ignore
-	return drizzle(process.env.DATABASE_URL!);
-};
+// User
 
 import { createUserId } from "../domain/user";
 import type { User } from "../domain/user";
@@ -28,6 +25,8 @@ export const createFakeUser = async (params: Partial<User> = {}) => {
 
 	return user;
 };
+
+// Todo
 
 import { createTodoId } from "../domain/todo";
 import type { Todo } from "../domain/todo";

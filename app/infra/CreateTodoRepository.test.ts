@@ -2,7 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { eq } from "drizzle-orm";
 import { ok } from "neverthrow";
 
-import { buildFakeTodo, createDrizzle, createFakeUser } from "../test/util";
+import { createDrizzle } from "../infra";
+import { buildFakeTodo, createFakeUser } from "../test/util";
 import { todoAssignees, todos } from "./schema";
 
 import { CreateTodoRepository } from "./CreateTodoRepository";
@@ -18,11 +19,7 @@ describe("save", async () => {
 		const result = await repo.save({ todo });
 		expect(result).toEqual(ok(null));
 
-		const todoRow = await db
-			.select()
-			.from(todos)
-			.where(eq(todos.id, todo.id))
-			.get();
+		const todoRow = db.select().from(todos).where(eq(todos.id, todo.id)).get();
 
 		expect(todoRow).toEqual({
 			id: todo.id,

@@ -2,7 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { eq } from "drizzle-orm";
 import { ok } from "neverthrow";
 
-import { buildFakeUser, createDrizzle } from "../test/util";
+import { createDrizzle } from "../infra";
+import { buildFakeUser } from "../test/util";
 import { users } from "./schema";
 
 import { SignUpRepository } from "./SignUpRepository";
@@ -17,11 +18,7 @@ describe("SignUpRepository.save", async () => {
 		const result = await repo.save({ user });
 		expect(result).toEqual(ok(null));
 
-		const got = await db
-			.select()
-			.from(users)
-			.where(eq(users.id, user.id))
-			.get();
+		const got = db.select().from(users).where(eq(users.id, user.id)).get();
 		expect(got).toEqual(
 			expect.objectContaining({
 				...user,

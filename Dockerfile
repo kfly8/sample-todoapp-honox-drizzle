@@ -19,17 +19,17 @@ FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
-ENV NODE_ENV=production
-ENV DATABASE_URL=file:todoapp.db
+RUN mkdir -p /var/lib/todoapp
 
-RUN bunx --bun vite build
+ENV NODE_ENV=production
+RUN bun run build
 RUN bunx --bun drizzle-kit migrate
 
 FROM base AS release
-COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/dist/* .
-COPY --from=prerelease /usr/src/app/todoapp.db .
+COPY --chown=bun:bun --from=install /temp/prod/node_modules node_modules
+COPY --chown=bun:bun --from=prerelease /usr/src/app/dist .
+COPY --chown=bun:bun --from=prerelease /var/lib/todoapp/ /var/lib/todoapp/
 
 USER bun
 EXPOSE 3000/tcp
-ENTRYPOINT [ "bun", "run", "index.js" ]
+CMD [ "bun", "run", "index.js" ]
