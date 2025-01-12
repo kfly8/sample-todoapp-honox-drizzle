@@ -1,15 +1,17 @@
 import { zValidator as zv } from "@hono/zod-validator";
-import { createRoute } from "honox/factory";
+import { Hono } from "hono";
 
 import { SignUpCmd } from "@/cmd/SignUpCmd";
 import { userSchema } from "@/domain/user";
 import { newSignUpRepository } from "@/infra";
 
+const app = new Hono();
+
 const signUpRepo = newSignUpRepository();
 const signUpCmd = new SignUpCmd(signUpRepo);
 const postRequest = userSchema.pick({ name: true });
 
-export const POST = createRoute(zv("json", postRequest), async (c) => {
+export const post = app.post("/", zv("json", postRequest), async (c) => {
 	const { name } = c.req.valid("json");
 
 	const result = await signUpCmd.execute({ name });
@@ -20,3 +22,7 @@ export const POST = createRoute(zv("json", postRequest), async (c) => {
 
 	return c.json(result.value, 201);
 });
+
+export type PostType = typeof post;
+
+export default app;
