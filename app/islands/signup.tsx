@@ -16,10 +16,6 @@ export default function Signup() {
 	const handleClick = async (e: Event) => {
 		e.preventDefault();
 
-		if (userName === "") {
-			return;
-		}
-
 		const res = await client.$post({ json: { name: userName } });
 		if (res.status === 201) {
 			const user = await res.json();
