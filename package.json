@@ -12,7 +12,7 @@
 	"dependencies": {
 		"@hono/zod-validator": "^0.4.2",
 		"drizzle-orm": "^0.38.3",
-		"hono": "^4.6.15",
+		"hono": "^4.6.16",
 		"honox": "^0.1.27",
 		"neverthrow": "^8.1.1"
 	},
