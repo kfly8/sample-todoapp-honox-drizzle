@@ -1,51 +1,38 @@
-import { hc } from "hono/client";
+import { useAuth } from "@/hooks/auth";
 import { useState } from "hono/jsx";
-import type { PostType } from "../routes/api/signup";
-
-const client = hc<PostType>("/api/signup").index;
 
 export default function Signup() {
-	const [userName, setUserName] = useState<string>("");
-	const [userId, setUserId] = useState<string>("");
+	const { user, signup } = useAuth();
+	const [name, setName] = useState<string>("");
 
 	const handleChange = (e: Event) => {
 		const target = e.target as HTMLInputElement;
-		setUserName(target.value);
+		setName(target.value);
 	};
 
-	const handleClick = async (e: Event) => {
+	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
-
-		const res = await client.$post({ json: { name: userName } });
-		if (res.status === 201) {
-			const user = await res.json();
-			setUserId(user.id);
-			return;
-		}
-
-		const error = await res.json();
-		console.log(error);
+		signup(name);
 	};
 
 	return (
-		<div>
-			{userId === "" ? (
+		<>
+			{user === null ? (
 				<form>
 					<input
 						type="text"
 						name="name"
 						placeholder="Input your name"
-						value={userName}
 						required
 						onChange={(e) => handleChange(e)}
 					/>
-					<button type="button" onClick={(e) => handleClick(e)}>
+					<button type="submit" onClick={(e) => handleSubmit(e)}>
 						Signup
 					</button>
 				</form>
 			) : (
-				<p>Hello, {userName}!</p>
+				<p>Hello, {user.name}!</p>
 			)}
-		</div>
+		</>
 	);
 }

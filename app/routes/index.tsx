@@ -1,6 +1,7 @@
+import { AuthProvider } from "@/hooks/auth";
+import Signup from "@/islands/signup";
 import { css } from "hono/css";
 import { createRoute } from "honox/factory";
-import Signup from "../islands/signup";
 
 const className = css`
   font-family: sans-serif;
@@ -8,9 +9,9 @@ const className = css`
 
 export default createRoute((c) => {
 	return c.render(
-		<div class={className}>
+		<AuthProvider class={className}>
 			<Signup />
-		</div>,
+		</AuthProvider>,
 		{ title: "Todo App" },
 	);
 });
