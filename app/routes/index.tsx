@@ -1,11 +1,10 @@
 import { deleteCookie, getCookie } from "hono/cookie";
-import { createContext } from "hono/jsx";
 import { createRoute } from "honox/factory";
 
+import { LoginContext } from "@/components/LoginContext";
+import { TodoList } from "@/components/TodoList";
 import type { User } from "@/domain/user";
 import { verifyToken } from "@/utils";
-
-const LoginContext = createContext<User | null>(null);
 
 export default createRoute(async (c) => {
 	const token = getCookie(c, "token");
@@ -25,6 +24,7 @@ export default createRoute(async (c) => {
 	return c.render(
 		<LoginContext value={user}>
 			<header>Hello, {user.name}</header>
+			<TodoList />
 		</LoginContext>,
 		{ title: "Todo App" },
 	);
