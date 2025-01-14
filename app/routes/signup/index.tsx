@@ -4,8 +4,9 @@ import { createRoute } from "honox/factory";
 
 import { SignUpCmd } from "@/cmd/SignUpCmd";
 import { userSchema } from "@/domain/user";
+import type { User } from "@/domain/user";
 import { newSignUpRepository } from "@/infra";
-import { generateUserToken } from "@/utils";
+import { generateToken } from "@/utils";
 
 export const GET = createRoute(async (c) => {
 	return c.render(
@@ -30,8 +31,8 @@ export const POST = createRoute(zv("form", postRequest), async (c) => {
 		return c.json({ message: result.error.message }, 500);
 	}
 
-	const payload = { user: result.value };
-	const token = await generateUserToken(payload);
+	const payload = { ...result.value };
+	const token = await generateToken<User>(payload);
 	setCookie(c, "token", token, { httpOnly: true });
 
 	return c.redirect("/");

@@ -5,14 +5,7 @@ export const generateId = () => {
 	return Bun.randomUUIDv7();
 };
 
-type Payload = {
-	user: {
-		id: string;
-		name: string;
-	};
-};
-
-export const generateUserToken = async (payload: Payload) => {
+export const generateToken = async <T>(payload: T) => {
 	const secret = "hello";
 
 	const iat = Math.floor(Date.now() / 1000);
@@ -24,10 +17,10 @@ export const generateUserToken = async (payload: Payload) => {
 	return token;
 };
 
-export const verifyUserToken = async (token: string) => {
+export const verifyToken = async <T>(token: string) => {
 	try {
 		const payload = await verify(token, "hello");
-		return ok(payload as Payload);
+		return ok(payload as T);
 	} catch (e) {
 		return err(e);
 	}

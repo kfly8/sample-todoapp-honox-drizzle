@@ -1,11 +1,11 @@
-import { verifyUserToken } from "@/utils";
 import { deleteCookie, getCookie } from "hono/cookie";
-import { css } from "hono/css";
+import { createContext } from "hono/jsx";
 import { createRoute } from "honox/factory";
 
-const className = css`
-  font-family: sans-serif;
-`;
+import type { User } from "@/domain/user";
+import { verifyToken } from "@/utils";
+
+const LoginContext = createContext<User | null>(null);
 
 export default createRoute(async (c) => {
 	const token = getCookie(c, "token");
@@ -14,15 +14,18 @@ export default createRoute(async (c) => {
 		return c.redirect("/signup");
 	}
 
-	const result = await verifyUserToken(token);
+	const result = await verifyToken<User>(token);
 	if (result.isErr()) {
 		deleteCookie(c, "token");
 		return c.text("Unauthorized", 401);
 	}
 
-	const user = result.value.user;
+	const user = result.value;
 
-	return c.render(<div class={className}>Hello, {user.name}</div>, {
-		title: "Todo App",
-	});
+	return c.render(
+		<LoginContext value={user}>
+			<header>Hello, {user.name}</header>
+		</LoginContext>,
+		{ title: "Todo App" },
+	);
 });
