@@ -7,7 +7,7 @@ import type { User } from "@/domain/user";
 import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
 
-import TodoApp from "@/islands/TodoApp";
+import TodoIsland from "@/islands/TodoIsland";
 import { verifyToken } from "@/utils";
 
 export default createRoute(async (c) => {
@@ -36,7 +36,7 @@ export default createRoute(async (c) => {
 	return c.render(
 		<LoginContext value={user}>
 			<header>Hello, {user.name}</header>
-			<TodoApp user={user} todos={rows} />
+			<TodoIsland user={user} todos={rows} />
 		</LoginContext>,
 		{ title: "Todo App" },
 	);
