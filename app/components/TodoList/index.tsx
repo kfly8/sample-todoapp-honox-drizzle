@@ -1,13 +1,28 @@
-import { useLoginContext } from "@/components/LoginContext";
-import type { FC } from "hono/jsx";
+type Todo = {
+	id: string;
+	completed: boolean | null;
+	title: string;
+};
 
-export const TodoList: FC = () => {
-	const user = useLoginContext();
-	console.log(user);
+type Params = {
+	todos: Todo[];
+};
 
+export const TodoList = ({ todos }: Params) => {
 	return (
 		<>
-			<li>Buy milk</li>
+			<form>
+				<input type="text" placeholder="Add a todo" />
+				<button type="submit">Add</button>
+			</form>
+			<ul>
+				{todos.map((todo) => (
+					<li key={todo.id}>
+						<input type="checkbox" checked={!!todo.completed} />
+						{todo.title}
+					</li>
+				))}
+			</ul>
 		</>
 	);
 };
