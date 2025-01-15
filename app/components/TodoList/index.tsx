@@ -11,10 +11,6 @@ type Params = {
 export const TodoList = ({ todos }: Params) => {
 	return (
 		<>
-			<form>
-				<input type="text" placeholder="Add a todo" />
-				<button type="submit">Add</button>
-			</form>
 			<ul>
 				{todos.map((todo) => (
 					<li key={todo.id}>

@@ -7,6 +7,7 @@ import { TodoList } from "@/components/TodoList";
 import type { User } from "@/domain/user";
 import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
+import { AddTodo } from "@/islands/AddTodo";
 import { verifyToken } from "@/utils";
 
 export default createRoute(async (c) => {
@@ -30,6 +31,7 @@ export default createRoute(async (c) => {
 	return c.render(
 		<LoginContext value={user}>
 			<header>Hello, {user.name}</header>
+			<AddTodo />
 			<TodoList todos={rows} />
 		</LoginContext>,
 		{ title: "Todo App" },
