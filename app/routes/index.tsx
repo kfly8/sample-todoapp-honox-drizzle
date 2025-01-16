@@ -23,12 +23,17 @@ export default createRoute(async (c) => {
 		return c.text("Unauthorized", 401);
 	}
 
-	const user = result.value;
+	const user = { id: result.value.id, name: result.value.name };
 
-	// TODO: Move to query or call /api/todo
+	// Move to query namespace if it gets too complicated
 	const db = createDrizzle();
 	const rows = await db
-		.select()
+		.select({
+			id: todos.id,
+			title: todos.title,
+			completed: todos.completed,
+			authorId: todos.authorId,
+		})
 		.from(todos)
 		.where(eq(todos.authorId, user.id))
 		.orderBy(desc(todos.createdAt));
