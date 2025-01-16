@@ -3,8 +3,10 @@ import { sqliteTable as table } from "drizzle-orm/sqlite-core";
 import * as t from "drizzle-orm/sqlite-core";
 import { generateId } from "../utils";
 
-import type { TodoId } from "../domain/todo";
-import type { UserId } from "../domain/user";
+import type { TodoId } from "@/domain/todo";
+import type { UserId } from "@/domain/user";
+
+// NOTE: Basiacally, we should not use `default` value in the schema because default value should be set in the domain layer.
 
 // utils
 const createdAt = t.text("created_at").default(sql`(CURRENT_TIMESTAMP)`);
@@ -12,6 +14,17 @@ const updatedAt = t
 	.text("updated_at")
 	.default(sql`(CURRENT_TIMESTAMP)`)
 	.$onUpdate(() => sql`(CURRENT_TIMESTAMP)`);
+
+// Domain: User
+
+export const users = table("users", {
+	id: t.text().notNull().primaryKey().$type<UserId>(),
+	name: t.text().notNull(),
+	createdAt,
+	updatedAt,
+});
+
+// Domain: Todo
 
 export const todos = table("todos", {
 	id: t.text().notNull().primaryKey().$type<TodoId>(),
@@ -23,13 +36,6 @@ export const todos = table("todos", {
 		.notNull()
 		.references(() => users.id)
 		.$type<UserId>(),
-	createdAt,
-	updatedAt,
-});
-
-export const users = table("users", {
-	id: t.text().notNull().primaryKey().$type<UserId>(),
-	name: t.text().notNull(),
 	createdAt,
 	updatedAt,
 });
