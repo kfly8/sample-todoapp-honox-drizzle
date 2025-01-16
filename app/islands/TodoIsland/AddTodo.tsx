@@ -8,10 +8,11 @@ const client = hc<AppType>("/api/todo");
 
 type Params = {
 	user: User;
-	addTodo: (todo: Todo) => void; // Function to add a todo to the list / TODO: use Context?
+	todos: Todo[];
+	setTodos: (todos: Todo[]) => void;
 };
 
-export default function AddTodo({ user, addTodo }: Params) {
+export default function AddTodo({ user, todos, setTodos }: Params) {
 	const [title, setTitle] = useState("");
 
 	const handleTitleChange = (e: Event) => {
@@ -22,15 +23,20 @@ export default function AddTodo({ user, addTodo }: Params) {
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault();
 
+		if (!title) {
+			// Don't add empty todos
+			return;
+		}
+
 		const result = await client.index.$post({
 			json: { title, authorId: user.id },
 		});
 
-		if (result.status === 500) {
+		if (result.status !== 201) {
 			console.error("Failed to add todo");
 		} else {
 			const todo = await result.json();
-			addTodo(todo);
+			setTodos([todo, ...todos]); // Add the new todo to the list
 			setTitle(""); // Clear the input field
 		}
 	};
@@ -42,6 +48,7 @@ export default function AddTodo({ user, addTodo }: Params) {
 				placeholder="Add a todo"
 				onChange={(e) => handleTitleChange(e)}
 				value={title}
+				required
 			/>
 			<button type="submit" onClick={(e) => handleSubmit(e)}>
 				Add

@@ -13,14 +13,9 @@ type Params = {
 export default function TodoIsland({ user, todos: initialTodos }: Params) {
 	const [todos, setTodos] = useState<Todo[]>(initialTodos);
 
-	// TODO: use Context?
-	const addTodo = (todo: Todo) => {
-		setTodos([todo, ...todos]);
-	};
-
 	return (
 		<>
-			<AddTodo user={user} addTodo={addTodo} />
+			<AddTodo user={user} todos={todos} setTodos={setTodos} />
 			<TodoList todos={todos} />
 		</>
 	);
