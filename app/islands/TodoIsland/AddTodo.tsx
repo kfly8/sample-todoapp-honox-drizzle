@@ -4,7 +4,7 @@ import { useState } from "hono/jsx";
 import type { Todo, User } from "./types";
 
 import type { AppType } from "@/routes/api/todo";
-const client = hc<AppType>("/api/todo");
+const client = hc<AppType>("/api/todo").index;
 
 type Params = {
 	user: User;
@@ -28,7 +28,7 @@ export default function AddTodo({ user, todos, setTodos }: Params) {
 			return;
 		}
 
-		const result = await client.index.$post({
+		const result = await client.$post({
 			json: { title, authorId: user.id },
 		});
 

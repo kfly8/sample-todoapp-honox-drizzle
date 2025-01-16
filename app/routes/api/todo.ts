@@ -5,12 +5,12 @@ import { CreateTodoCmd } from "@/cmd/CreateTodoCmd";
 import { todoSchema } from "@/domain/todo";
 import { newCreateTodoRepository } from "@/infra";
 
-const app = new Hono();
-
 const postRequest = todoSchema.pick({ title: true, authorId: true });
 
+const app = new Hono();
+
 // TODO: auth middleware
-const POST = app.post("/", zv("json", postRequest), async (c) => {
+const routes = app.post("/", zv("json", postRequest), async (c) => {
 	const { title, authorId } = c.req.valid("json");
 
 	const repo = newCreateTodoRepository();
@@ -27,7 +27,5 @@ const POST = app.post("/", zv("json", postRequest), async (c) => {
 	return c.json(todo, 201);
 });
 
-// TODO: Grouping all api routes
-export type AppType = typeof POST;
-
+export type AppType = typeof routes;
 export default app;
