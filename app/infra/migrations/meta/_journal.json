@@ -1,13 +1,20 @@
 {
-	"version": "7",
-	"dialect": "sqlite",
-	"entries": [
-		{
-			"idx": 0,
-			"version": "6",
-			"when": 1735994536752,
-			"tag": "0000_yellow_slipstream",
-			"breakpoints": true
-		}
-	]
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1735994536752,
+      "tag": "0000_yellow_slipstream",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1736987302426,
+      "tag": "0001_dizzy_weapon_omega",
+      "breakpoints": true
+    }
+  ]
 }

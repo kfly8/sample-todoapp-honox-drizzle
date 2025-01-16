@@ -17,11 +17,12 @@ export const todos = table("todos", {
 	id: t.text().notNull().primaryKey().$type<TodoId>(),
 	title: t.text().notNull(),
 	description: t.text(),
-	completed: t.integer({ mode: "boolean" }).default(false),
+	completed: t.integer({ mode: "boolean" }).notNull(),
 	authorId: t
 		.text("author_id")
 		.notNull()
-		.references(() => users.id),
+		.references(() => users.id)
+		.$type<UserId>(),
 	createdAt,
 	updatedAt,
 });
