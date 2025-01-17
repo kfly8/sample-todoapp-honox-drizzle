@@ -5,11 +5,13 @@ on:
       - main
   pull_request:
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: env NODE_ENV=test bunx --bun drizzle-kit migrate
+      - run: bunx tsc --noEmit
+      - run: bunx biome check
       - run: bun test
