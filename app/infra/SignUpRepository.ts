@@ -1,20 +1,28 @@
-import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import { ok } from "neverthrow";
 
 import { users } from "./schema";
+import type { DB, TX } from "./types";
 
 import type { Repository, RepositoryParams } from "../cmd/SignUpCmd";
 
-export class SignUpRepository implements Repository {
-	#db: BunSQLiteDatabase;
+type User = RepositoryParams["user"];
 
-	constructor(db: BunSQLiteDatabase) {
+export class SignUpRepository implements Repository {
+	#db: DB;
+
+	constructor(db: DB) {
 		this.#db = db;
 	}
 
 	async save({ user }: RepositoryParams) {
-		await this.#db.insert(users).values(user);
+		await this.#db.transaction(async (tx) => {
+			await saveUser(tx, user);
+		});
 
 		return ok(null);
 	}
+}
+
+async function saveUser(tx: TX, user: User) {
+	await tx.insert(users).values(user);
 }

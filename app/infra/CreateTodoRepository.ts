@@ -1,47 +1,53 @@
 import { eq } from "drizzle-orm";
-import type { BunSQLiteDatabase } from "drizzle-orm/bun-sqlite";
 import { ok } from "neverthrow";
 
 import { todoAssignees, todos } from "./schema";
+import type { DB, TX } from "./types";
 
 import type { Repository, RepositoryParams } from "../cmd/CreateTodoCmd";
 
 type Todo = RepositoryParams["todo"];
 
 export class CreateTodoRepository implements Repository {
-	#db: BunSQLiteDatabase;
+	#db: DB;
 
-	constructor(db: BunSQLiteDatabase) {
+	constructor(db: DB) {
 		this.#db = db;
 	}
 
 	async save({ todo }: RepositoryParams) {
-		const { id, assigneeIds, completed, ...rest } = todo;
+		const { id, assigneeIds, ...rest } = todo;
 
-		// TODO: txn
-		await this.#db
-			.insert(todos)
-			.values({ id, completed: !!completed, ...rest });
-		await this.saveTodoAssignees(id, assigneeIds);
+		await this.#db.transaction(async (tx) => {
+			await saveTodo(tx, { id, ...rest });
+			await saveTodoAssignees(tx, id, assigneeIds);
+		});
 
 		return ok(null);
 	}
+}
 
-	private async saveTodoAssignees(
-		todoId: Todo["id"],
-		assigneeIds: Todo["assigneeIds"],
-	) {
-		if (assigneeIds === undefined) {
-			return;
-		}
+async function saveTodo(
+	tx: TX,
+	data: Pick<Todo, "id" | "completed" | "title" | "description" | "authorId">,
+) {
+	const { completed, ...rest } = data;
+	await tx.insert(todos).values({ ...rest, completed: !!completed });
+}
 
-		const assignees = assigneeIds.map((userId) => ({ todoId, userId }));
+async function saveTodoAssignees(
+	tx: TX,
+	todoId: Todo["id"],
+	assigneeIds: Todo["assigneeIds"],
+) {
+	if (assigneeIds === undefined) {
+		return;
+	}
 
-		await this.#db
-			.delete(todoAssignees)
-			.where(eq(todoAssignees.todoId, todoId));
-		for (const assignee of assignees) {
-			await this.#db.insert(todoAssignees).values(assignee);
-		}
+	const assignees = assigneeIds.map((userId) => ({ todoId, userId }));
+
+	await tx.delete(todoAssignees).where(eq(todoAssignees.todoId, todoId));
+	for (const assignee of assignees) {
+		await tx.insert(todoAssignees).values(assignee);
 	}
 }
