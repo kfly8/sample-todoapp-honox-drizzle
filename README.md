@@ -1,4 +1,6 @@
+![test workflow](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
 [![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+
 
 ## What is this?
 
