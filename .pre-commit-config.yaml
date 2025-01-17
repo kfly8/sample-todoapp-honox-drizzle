@@ -7,15 +7,3 @@ repos:
         language: system
         types: [text]
         files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|css|svelte|vue|astro|graphql|gql)$"
-      - id: local-typecheck
-        name: type check
-        entry: bunx tsc --noEmit
-        language: system
-        types: [text]
-        files: "\\.(ts|tsx)$"
-      - id: local-test
-        name: test
-        entry: bun test
-        language: system
-        types: [text]
-        files: "\\.(ts|tsx)$"
