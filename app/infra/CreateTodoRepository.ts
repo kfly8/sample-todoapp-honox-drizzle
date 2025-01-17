@@ -16,10 +16,12 @@ export class CreateTodoRepository implements Repository {
 	}
 
 	async save({ todo }: RepositoryParams) {
-		const { id, assigneeIds, ...rest } = todo;
+		const { id, assigneeIds, completed, ...rest } = todo;
 
 		// TODO: txn
-		await this.#db.insert(todos).values({ id, ...rest });
+		await this.#db
+			.insert(todos)
+			.values({ id, completed: !!completed, ...rest });
 		await this.saveTodoAssignees(id, assigneeIds);
 
 		return ok(null);
