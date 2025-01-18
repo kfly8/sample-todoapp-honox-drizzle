@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { ok } from "neverthrow";
+import { err, ok } from "neverthrow";
 
 import { todoAssignees, todos } from "./schema";
 import type { DB, TX } from "./types";
@@ -18,10 +18,14 @@ export class CreateTodoRepository implements Repository {
 	async save({ todo }: RepositoryParams) {
 		const { id, assigneeIds, ...rest } = todo;
 
-		await this.#db.transaction(async (tx) => {
-			await saveTodo(tx, { id, ...rest });
-			await saveTodoAssignees(tx, id, assigneeIds);
-		});
+		try {
+			await this.#db.transaction(async (tx) => {
+				await saveTodo(tx, { id, ...rest });
+				await saveTodoAssignees(tx, id, assigneeIds);
+			});
+		} catch (error) {
+			return err(new Error("Failed to save todo", { cause: error }));
+		}
 
 		return ok(null);
 	}
@@ -32,6 +36,7 @@ async function saveTodo(
 	data: Pick<Todo, "id" | "completed" | "title" | "description" | "authorId">,
 ) {
 	const { completed, ...rest } = data;
+	// transform undefined to false
 	await tx.insert(todos).values({ ...rest, completed: !!completed });
 }
 

@@ -1,4 +1,4 @@
-import { ok } from "neverthrow";
+import { err, ok } from "neverthrow";
 
 import { users } from "./schema";
 import type { DB, TX } from "./types";
@@ -15,9 +15,13 @@ export class SignUpRepository implements Repository {
 	}
 
 	async save({ user }: RepositoryParams) {
-		await this.#db.transaction(async (tx) => {
-			await saveUser(tx, user);
-		});
+		try {
+			await this.#db.transaction(async (tx) => {
+				await saveUser(tx, user);
+			});
+		} catch (error) {
+			return err(new Error("Failed to save user", { cause: error }));
+		}
 
 		return ok(null);
 	}
