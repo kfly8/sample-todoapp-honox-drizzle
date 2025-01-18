@@ -7,7 +7,15 @@ import { SignUpRepository } from "./SignUpRepository";
 export const createDatabase = () => {
 	// biome-ignore lint/style/noNonNullAssertion: ignore
 	const path = import.meta.env.VITE_DATABASE_PATH!;
-	return new Database(path);
+
+	const db = new Database(path, { strict: true });
+
+	db.exec(`
+		PRAGMA foreign_keys= 1;
+		PRAGMA journal_mode = WAL;
+	`);
+
+	return db;
 };
 
 export const createDrizzle = () => {
