@@ -1,11 +1,10 @@
 import { Hono } from "hono";
 
+import { POST } from "./todo";
+
 // Create AppType for RPC.
 // This is not a routing table for the real server, just a type definition
 
-const app = new Hono().basePath("/api");
+export const app = new Hono().basePath("/api").post("/todo", ...POST);
 
-import { POST } from "./todo";
-const routes = app.post("/todo", ...POST);
-
-export type AppType = typeof routes;
+export type AppType = typeof app;
