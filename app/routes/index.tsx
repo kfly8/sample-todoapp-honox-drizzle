@@ -1,28 +1,39 @@
 import { desc, eq } from "drizzle-orm";
+import { Hono } from "hono";
 import { deleteCookie, getCookie } from "hono/cookie";
+import { jwt } from "hono/jwt";
+import type { JwtVariables } from "hono/jwt";
+import { logger } from "hono/logger";
 import { createRoute } from "honox/factory";
 
-import type { User } from "@/domain/user";
 import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
+import { TOKEN_SECRET, verifyToken } from "@/token";
 
 import TodoIsland from "@/islands/TodoIsland";
-import { verifyToken } from "@/utils";
 
-export default createRoute(async (c) => {
+type Variables = JwtVariables;
+
+const app = new Hono<{ Variables: Variables }>();
+
+app.use(logger());
+
+app.use("/api/*", jwt({ secret: TOKEN_SECRET, cookie: "token" }));
+
+export const GET = createRoute(async (c) => {
 	const token = getCookie(c, "token");
 
 	if (token === undefined) {
 		return c.redirect("/signup");
 	}
 
-	const result = await verifyToken<User>(token);
+	const result = await verifyToken(token);
 	if (result.isErr()) {
 		deleteCookie(c, "token");
 		return c.text("Unauthorized", 401);
 	}
 
-	const user = { id: result.value.id, name: result.value.name };
+	const user = result.value.user;
 
 	// Move to query namespace if it gets too complicated
 	const db = createDrizzle();
@@ -45,3 +56,5 @@ export default createRoute(async (c) => {
 		{ title: "Todo App" },
 	);
 });
+
+export default app;
