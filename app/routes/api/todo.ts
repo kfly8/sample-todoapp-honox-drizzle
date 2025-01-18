@@ -1,5 +1,4 @@
 import { zValidator as zv } from "@hono/zod-validator";
-import { Hono } from "hono";
 import { createRoute } from "honox/factory";
 
 import { CreateTodoCmd } from "@/cmd/CreateTodoCmd";
@@ -24,8 +23,3 @@ export const POST = createRoute(zv("json", postRequest), async (c) => {
 
 	return c.json(todo, 201);
 });
-
-// TODO: refactor
-const app = new Hono();
-const routes = app.post("/todo", ...POST);
-export type AppType = typeof routes;

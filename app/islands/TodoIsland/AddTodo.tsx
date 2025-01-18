@@ -3,8 +3,8 @@ import { useState } from "hono/jsx";
 
 import type { Todo, User } from "./types";
 
-import type { AppType } from "@/routes/api/todo";
-const client = hc<AppType>("/api/todo").index;
+import type { AppType } from "@/routes/api/RPC";
+const client = hc<AppType>("");
 
 type Params = {
 	user: User;
@@ -28,7 +28,7 @@ export default function AddTodo({ user, todos, setTodos }: Params) {
 			return;
 		}
 
-		const result = await client.$post({
+		const result = await client.api.todo.$post({
 			json: { title, authorId: user.id },
 		});
 
