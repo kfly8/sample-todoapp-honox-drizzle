@@ -6,6 +6,7 @@ import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
 import { verifyToken } from "@/token";
 
+import HeaderIsland from "@/islands/HeaderIsland";
 import TodoIsland from "@/islands/TodoIsland";
 
 export const GET = createRoute(async (c) => {
@@ -38,7 +39,7 @@ export const GET = createRoute(async (c) => {
 
 	return c.render(
 		<>
-			<header>Hello, {user.name}</header>
+			<HeaderIsland user={user} />
 			<TodoIsland user={user} todos={rows} />
 		</>,
 		{ title: "Todo App" },
