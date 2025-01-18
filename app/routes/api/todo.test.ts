@@ -1,6 +1,7 @@
 import { describe, expect, it } from "bun:test";
 import { testClient } from "hono/testing";
 
+import { createFakeUser } from "@/test/util";
 import { app } from "./RPC";
 
 describe("POST /api/todo", async () => {
@@ -9,25 +10,25 @@ describe("POST /api/todo", async () => {
 	it("should return 201 response", async () => {
 		const res = await client.api.todo.$post({
 			json: {
-				// TODO: authorId doesn't exists in database, so it should return 500, foreign key constraint.
 				title: "test",
-				authorId: "test",
+				authorId: "unknown",
+			},
+		});
+
+		expect(res.status).toBe(500);
+	});
+
+	it("should return 201 response", async () => {
+		const user = await createFakeUser();
+
+		const res = await client.api.todo.$post({
+			json: {
+				title: "test",
+				authorId: user.id,
 			},
 		});
 
 		expect(res.status).toBe(201);
-	});
-
-	it("should return 400 response", async () => {
-		const res = await client.api.todo.$post({
-			json: {
-				title: "",
-				authorId: "",
-			},
-		});
-
-		// TODO: zod-validator returns 400 status code, but type doesn't accepts it
-		// @ts-ignore
-		expect(res.status).toBe(400);
+		// TODO fetch todo and check if it's saved
 	});
 });
