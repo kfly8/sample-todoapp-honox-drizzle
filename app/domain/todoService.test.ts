@@ -2,7 +2,8 @@ import { describe, expect, test } from "bun:test";
 import { ok } from "neverthrow";
 import type { ZodError } from "zod";
 
-import { createTodo } from "./todoService";
+import { createTodoId } from "./todo";
+import { createTodo, updateTodo } from "./todoService";
 import { createUserId } from "./user";
 
 describe("createTodo", async () => {
@@ -73,5 +74,31 @@ describe("createTodo", async () => {
 				expect(err.errors).toEqual([expect.objectContaining(c.expected)]);
 			}
 		}
+	});
+});
+
+describe("updateTodo", async () => {
+	test("When valid title is given, then it return title updated todo", async () => {
+		const id = createTodoId();
+		const title = "Buy 2L milk";
+
+		const result = updateTodo(id, { title });
+		expect(result).toEqual(ok({ id, title }));
+	});
+
+	test("When invalid title is given, then it return ZodError", async () => {
+		const id = createTodoId();
+		const title = "";
+
+		const result = updateTodo(id, { title });
+		expect(result.isErr()).toBeTrue();
+	});
+
+	test("When valid assigneeIds is given, then it return assigneeIds updated todo", async () => {
+		const id = createTodoId();
+		const assigneeIds = [createUserId()];
+
+		const result = updateTodo(id, { assigneeIds });
+		expect(result).toEqual(ok({ id, assigneeIds }));
 	});
 });

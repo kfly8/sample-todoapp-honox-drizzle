@@ -2,7 +2,7 @@ import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 import type { Todo } from "../domain/todo";
 import { createTodo } from "../domain/todoService";
-import type { Params } from "../domain/todoService";
+import type { CreateTodoParams } from "../domain/todoService";
 
 export type RepositoryParams = {
 	todo: Todo;
@@ -17,7 +17,7 @@ export class CreateTodoCmd {
 		this.repo = repo;
 	}
 
-	async execute(params: Params) {
+	async execute(params: CreateTodoParams) {
 		const result = createTodo(params);
 		if (result.isErr()) {
 			return err(new Error("Failed to create todo", { cause: result.error }));
