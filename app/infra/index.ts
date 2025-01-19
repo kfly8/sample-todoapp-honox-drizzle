@@ -3,6 +3,7 @@ import { drizzle } from "drizzle-orm/bun-sqlite";
 
 import { CreateTodoRepository } from "./CreateTodoRepository";
 import { SignUpRepository } from "./SignUpRepository";
+import { UpdateTodoRepository } from "./UpdateTodoRepository";
 
 export const createDatabase = () => {
 	// biome-ignore lint/style/noNonNullAssertion: ignore
@@ -27,4 +28,7 @@ export const newSignUpRepository = () => {
 };
 export const newCreateTodoRepository = () => {
 	return new CreateTodoRepository(createDrizzle());
+};
+export const newUpdateTodoRepository = () => {
+	return new UpdateTodoRepository(createDrizzle());
 };
