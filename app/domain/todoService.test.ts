@@ -82,7 +82,7 @@ describe("updateTodo", async () => {
 		const id = createTodoId();
 		const title = "Buy 2L milk";
 
-		const result = updateTodo(id, { title });
+		const result = updateTodo({ id, title });
 		expect(result).toEqual(ok({ id, title }));
 	});
 
@@ -90,7 +90,7 @@ describe("updateTodo", async () => {
 		const id = createTodoId();
 		const title = "";
 
-		const result = updateTodo(id, { title });
+		const result = updateTodo({ id, title });
 		expect(result.isErr()).toBeTrue();
 	});
 
@@ -98,7 +98,7 @@ describe("updateTodo", async () => {
 		const id = createTodoId();
 		const assigneeIds = [createUserId()];
 
-		const result = updateTodo(id, { assigneeIds });
+		const result = updateTodo({ id, assigneeIds });
 		expect(result).toEqual(ok({ id, assigneeIds }));
 	});
 });

@@ -22,11 +22,13 @@ export function createTodo(params: CreateTodoParams) {
 	return ok(parsed.data);
 }
 
-export type UpdateTodoParams = Partial<CreateTodoParams>;
+export type UpdateTodoParams = { id: Todo["id"] } & Partial<CreateTodoParams>;
 
 const partialTodoSchema = todoSchema.partial();
 
-export function updateTodo(id: Todo["id"], params: UpdateTodoParams) {
+export function updateTodo(params: UpdateTodoParams) {
+	const id = params.id;
+
 	const parsed = partialTodoSchema.safeParse(params);
 	if (parsed.error) {
 		return err(parsed.error);
