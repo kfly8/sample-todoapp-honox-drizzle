@@ -16,7 +16,7 @@ export default function TodoIsland({ user, todos: initialTodos }: Params) {
 	return (
 		<>
 			<AddTodo user={user} todos={todos} setTodos={setTodos} />
-			<TodoList todos={todos} />
+			<TodoList todos={todos} setTodos={setTodos} />
 		</>
 	);
 }
