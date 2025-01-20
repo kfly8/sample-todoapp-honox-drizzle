@@ -7,7 +7,9 @@ type Params = {
 export default function TodoIsland({ user }: Params) {
 	return (
 		<>
-			<header>Hello, {user.name}</header>
+			<header>
+				<span class="text-3xl font-bold">Hello!</span> {user.name}
+			</header>
 		</>
 	);
 }

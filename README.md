@@ -15,6 +15,8 @@ This project is a sample project to try these stack:
     - [Zod](https://zod.dev/)
 - Test
     - [Bun test](https://bun.sh/docs/cli/test)
+- CSS
+    - [Tailwind CSS](https://tailwindcss.com/)
 - Runtime
     - [Bun](https://bun.sh/)
 - Development tool

@@ -1,4 +1,3 @@
-import { Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Script } from "honox/server";
 
@@ -15,7 +14,11 @@ export default jsxRenderer(({ children, title }) => {
 				) : (
 					<Script src="/app/client.ts" async />
 				)}
-				<Style />
+				{import.meta.env.PROD ? (
+					<link href="static/assets/style.css" rel="stylesheet" />
+				) : (
+					<link href="/app/style.css" rel="stylesheet" />
+				)}
 			</head>
 			<body>{children}</body>
 		</html>
