@@ -33,14 +33,14 @@ export default function TodoItem({ todo, setTodo }: Params) {
 	};
 
 	return (
-		<li>
+		<li class="flex items-center mb-2">
 			<input
-				id={todo.id}
 				type="checkbox"
 				checked={!!todo.completed}
 				onChange={(e) => handleCompletedChange(e)}
+				class="mr-3 w-5 h-5 accent-blue-500"
 			/>
-			<label for={todo.id}>{todo.title}</label>
+			<span class="text-gray-800">{todo.title}</span>
 		</li>
 	);
 }

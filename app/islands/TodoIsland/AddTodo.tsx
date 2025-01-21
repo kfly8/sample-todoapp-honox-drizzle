@@ -42,15 +42,20 @@ export default function AddTodo({ user, todos, setTodos }: Params) {
 	};
 
 	return (
-		<form>
+		<form class="flex items-center mb-4">
 			<input
 				type="text"
 				placeholder="Add a todo"
 				onChange={(e) => handleTitleChange(e)}
 				value={title}
 				required
+				class="flex-grow border border-gray-100 rounded-l-md px-3 py-2 focus:outline-none focus:ring focus:ring-gray-100"
 			/>
-			<button type="submit" onClick={(e) => handleSubmit(e)}>
+			<button
+				type="submit"
+				onClick={(e) => handleSubmit(e)}
+				class="bg-gray-100 text-gray-600 px-4 py-2 rounded-r-md hover:bg-gray-200 transition"
+			>
 				Add
 			</button>
 		</form>

@@ -1,5 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { deleteCookie, getCookie } from "hono/cookie";
+import type { PropsWithChildren } from "hono/jsx";
 import { createRoute } from "honox/factory";
 
 import { createDrizzle } from "@/infra";
@@ -38,10 +39,18 @@ export const GET = createRoute(async (c) => {
 		.orderBy(desc(todos.createdAt));
 
 	return c.render(
-		<>
+		<Layout>
 			<HeaderIsland user={user} />
 			<TodoIsland user={user} todos={rows} />
-		</>,
+		</Layout>,
 		{ title: "Todo App" },
 	);
 });
+
+const Layout = ({ children }: PropsWithChildren) => {
+	return (
+		<div class="max-w-sm mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+			{children}
+		</div>
+	);
+};
