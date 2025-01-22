@@ -11,12 +11,12 @@ export default defineConfig(({ mode }) => {
 				rollupOptions: {
 					input: {
 						client: "./app/client.ts",
-						styles: "./app/style.css",
+						style: "./app/style.css",
 					},
 					output: {
-						dir: "./dist/static",
-						entryFileNames: "[name].js",
-						assetFileNames: "static/assets/[name].[ext]",
+						dir: "./dist",
+						entryFileNames: "assets/[name].js",
+						assetFileNames: "assets/[name].[ext]",
 					},
 				},
 				copyPublicDir: false,

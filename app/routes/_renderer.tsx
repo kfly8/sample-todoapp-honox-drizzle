@@ -10,12 +10,12 @@ export default jsxRenderer(({ children, title }) => {
 				<title>{title}</title>
 				<link rel="icon" href="/favicon.ico" />
 				{import.meta.env.PROD ? (
-					<script type="module" src="/static/client.js" />
+					<script type="module" src="/assets/client.js" />
 				) : (
 					<Script src="/app/client.ts" async />
 				)}
 				{import.meta.env.PROD ? (
-					<link href="static/assets/style.css" rel="stylesheet" />
+					<link href="/assets/style.css" rel="stylesheet" />
 				) : (
 					<link href="/app/style.css" rel="stylesheet" />
 				)}
