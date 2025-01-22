@@ -1,10 +1,12 @@
 ![test workflow](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
 [![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
+<img width="511" alt="image" src="https://github.com/user-attachments/assets/170a14bb-6a81-4104-9ff7-4b5623156f5f" />
+
 
 ## What is this?
 
-This project is a sample project to try these stack:
+This project is a sample todo application to try these stack:
 
 - Web application framework
     - [Hono](https://hono.dev/) + [honox](https://github.com/honojs/honox)
@@ -31,34 +33,46 @@ This project is a sample project to try these stack:
 
 ## Setup
 
-### Clone the repository
+First, clone this repository.
 
 ```bash
-git clone https://github.com/kfly8/sample-todoapp-honox-drizzle.git
-cd sample-todoapp-honox-drizzle
+git clone https://github.com/kfly8/sample-todoapp-honox-zod-drizzle.git
+cd sample-todoapp-honox-zod-drizzle
 ```
 
-### Install dependencies
+Next, manually install or using docker.
+
+<details>
+    <summary>Case: Manually install</summary>
 
 ```bash
+# Install dependencies
 bun install
 ```
 
-### Database setup
-
 ```bash
-# for development
+# Database setup for development
 bunx --bun drizzle-kit migrate
 
-# for test
+# Database setup for test
 env NODE_ENV=test bunx --bun drizzle-kit migrate
 ```
 
-### Start the development server
-
 ```bash
+# Start the development server
 bun run dev
 ```
+</details>
+
+<details>
+    <summary>Case: Using Docker</summary>
+
+```bash
+docker build --pull -t sample-todoapp .
+docker run -d -p 3000:3000 sample-todoapp
+```
+</details>
+
 
 ## Migrations
 
