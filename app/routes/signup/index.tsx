@@ -7,12 +7,26 @@ import { userSchema } from "@/domain/user";
 import { newSignUpRepository } from "@/infra";
 import { generateToken } from "@/token";
 
+import Layout from "@/components/Layout";
+
 export const GET = createRoute(async (c) => {
 	return c.render(
-		<form action="/signup" method="post">
-			<input type="text" name="name" placeholder="Input your name" required />
-			<input type="submit" value="SignUp" />
-		</form>,
+		<Layout>
+			<form action="/signup" method="post">
+				<input
+					type="text"
+					name="name"
+					placeholder="Input your name"
+					required
+					class="flex-grow border border-gray-100 rounded-l-md px-3 py-2 focus:outline-none focus:ring focus:ring-gray-100"
+				/>
+				<input
+					type="submit"
+					value="SignUp"
+					class="bg-gray-100 text-gray-600 px-4 py-2 rounded-r-md hover:bg-gray-200 transition"
+				/>
+			</form>
+		</Layout>,
 	);
 });
 

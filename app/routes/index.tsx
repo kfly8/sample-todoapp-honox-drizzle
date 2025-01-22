@@ -1,12 +1,12 @@
 import { desc, eq } from "drizzle-orm";
 import { deleteCookie, getCookie } from "hono/cookie";
-import type { PropsWithChildren } from "hono/jsx";
 import { createRoute } from "honox/factory";
 
 import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
 import { verifyToken } from "@/token";
 
+import Layout from "@/components/Layout";
 import HeaderIsland from "@/islands/HeaderIsland";
 import TodoIsland from "@/islands/TodoIsland";
 
@@ -46,11 +46,3 @@ export const GET = createRoute(async (c) => {
 		{ title: "Todo App" },
 	);
 });
-
-const Layout = ({ children }: PropsWithChildren) => {
-	return (
-		<div class="max-w-sm mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
-			{children}
-		</div>
-	);
-};
