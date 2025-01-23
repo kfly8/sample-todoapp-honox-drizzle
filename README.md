@@ -45,6 +45,8 @@ Next, manually install or using docker.
 <details>
     <summary>Case: Manually install</summary>
 
+Bun version 1.2 or higher is required.
+
 ```bash
 # Install dependencies
 bun install
