@@ -22,11 +22,10 @@
 		"@hono/vite-build": "^1.2.1",
 		"@hono/vite-dev-server": "^0.17.0",
 		"@libsql/client": "^0.14.0",
+		"@tailwindcss/vite": "^4.0.0",
 		"@types/bun": "^1.1.14",
-		"autoprefixer": "^10.4.20",
 		"drizzle-kit": "^0.30.1",
-		"postcss": "^8.5.1",
-		"tailwindcss": "^3.4.17",
+		"tailwindcss": "^4.0.0",
 		"typescript": "^5.7.3",
 		"vite": "^5.2.12"
 	}

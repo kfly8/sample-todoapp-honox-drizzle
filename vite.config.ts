@@ -1,4 +1,5 @@
 import build from "@hono/vite-build/bun";
+import tailwindcss from "@tailwindcss/vite";
 import honox from "honox/vite";
 import { defineConfig } from "vite";
 import type { UserConfig } from "vite";
@@ -7,6 +8,7 @@ export default defineConfig(({ mode }) => {
 	let config: UserConfig;
 	if (mode === "client") {
 		config = {
+			plugins: [tailwindcss()],
 			build: {
 				rollupOptions: {
 					input: {
@@ -20,11 +22,13 @@ export default defineConfig(({ mode }) => {
 					},
 				},
 				copyPublicDir: false,
+				minify: true,
 			},
 		};
 	} else {
 		config = {
 			plugins: [
+				tailwindcss(),
 				honox(),
 				build({
 					minify: false,
