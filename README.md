@@ -18,9 +18,9 @@ This project is a sample todo application to try these stack:
 - Test
     - [Bun test](https://bun.sh/docs/cli/test)
 - CSS
-    - [Tailwind CSS](https://tailwindcss.com/)
+    - [Tailwind CSS](https://tailwindcss.com/) v4
 - Runtime
-    - [Bun](https://bun.sh/)
+    - [Bun](https://bun.sh/) v1.2
 - Development tool
     - [Vite](https://vite.dev/)
     - [Biome](https://biomejs.dev/)
