@@ -1,5 +1,4 @@
 @import "tailwindcss" source(none);
 
-@source "./components";
 @source "./islands";
 @source "./routes";

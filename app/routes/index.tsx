@@ -6,7 +6,6 @@ import { createDrizzle } from "@/infra";
 import { todos } from "@/infra/schema";
 import { verifyToken } from "@/token";
 
-import Layout from "@/components/Layout";
 import HeaderIsland from "@/islands/HeaderIsland";
 import TodoIsland from "@/islands/TodoIsland";
 
@@ -39,10 +38,10 @@ export const GET = createRoute(async (c) => {
 		.orderBy(desc(todos.createdAt));
 
 	return c.render(
-		<Layout>
+		<>
 			<HeaderIsland user={user} />
 			<TodoIsland user={user} todos={rows} />
-		</Layout>,
+		</>,
 		{ title: "Todo App" },
 	);
 });

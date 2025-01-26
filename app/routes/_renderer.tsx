@@ -20,7 +20,9 @@ export default jsxRenderer(({ children, title }) => {
 					<link href="/app/style.css" rel="stylesheet" />
 				)}
 			</head>
-			<body>{children}</body>
+			<body class="max-w-sm mx-auto mt-10 bg-white shadow-md rounded-lg p-6">
+				{children}
+			</body>
 		</html>
 	);
 });
