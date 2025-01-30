@@ -1,8 +1,8 @@
+import build from "@hono/vite-build";
 import tailwindcss from "@tailwindcss/vite";
 import honox from "honox/vite";
 import { defineConfig } from "vite";
 import type { UserConfig } from "vite";
-import build from "./vite-build";
 
 export default defineConfig(({ mode }) => {
 	let config: UserConfig;
