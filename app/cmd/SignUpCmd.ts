@@ -1,8 +1,7 @@
 import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
-import type { User } from "../domain/user";
-import { signUp } from "../domain/userService";
-import type { Params } from "../domain/userService";
+import type { Params, User } from "../domain/user";
+import { signUp } from "../domain/user";
 
 export type RepositoryParams = {
 	user: User;

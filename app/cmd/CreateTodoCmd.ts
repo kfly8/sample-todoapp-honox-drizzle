@@ -1,8 +1,7 @@
 import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
-import type { Todo } from "../domain/todo";
-import { createTodo } from "../domain/todoService";
-import type { CreateTodoParams } from "../domain/todoService";
+import type { CreateTodoParams, Todo } from "../domain/todo";
+import { createTodo } from "../domain/todo";
 
 export type RepositoryParams = {
 	todo: Todo;

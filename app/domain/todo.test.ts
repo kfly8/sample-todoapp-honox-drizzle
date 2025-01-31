@@ -2,8 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { ok } from "neverthrow";
 import type { ZodError } from "zod";
 
-import { createTodoId } from "./todo";
-import { createTodo, updateTodo } from "./todoService";
+import { createTodo, createTodoId, updateTodo } from "./todo";
 import { createUserId } from "./user";
 
 describe("createTodo", async () => {

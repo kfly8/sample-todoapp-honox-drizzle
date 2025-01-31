@@ -1,8 +1,8 @@
 import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 import type { Todo } from "../domain/todo";
-import { updateTodo } from "../domain/todoService";
-import type { UpdateTodoParams } from "../domain/todoService";
+import { updateTodo } from "../domain/todo";
+import type { UpdateTodoParams } from "../domain/todo";
 
 export type RepositoryParams = {
 	todo: { id: Todo["id"] } & Partial<Omit<Todo, "id">>;
