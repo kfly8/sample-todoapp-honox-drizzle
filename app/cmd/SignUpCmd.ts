@@ -2,7 +2,7 @@ import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 import type { Params, User } from "../domain/user";
 import { signUp } from "../domain/user";
-import type { Cmd } from "./cmd";
+import type { Cmd } from "./types";
 
 export type RepositoryParams = {
 	user: User;

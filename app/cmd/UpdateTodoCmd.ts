@@ -3,7 +3,7 @@ import type { Result } from "neverthrow";
 import type { Todo } from "../domain/todo";
 import { updateTodo } from "../domain/todo";
 import type { UpdateTodoParams } from "../domain/todo";
-import type { Cmd } from "./cmd";
+import type { Cmd } from "./types";
 
 export type RepositoryParams = {
 	todo: { id: Todo["id"] } & Partial<Omit<Todo, "id">>;
