@@ -2,6 +2,7 @@ import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 import type { Params, User } from "../domain/user";
 import { signUp } from "../domain/user";
+import type { Cmd } from "./cmd";
 
 export type RepositoryParams = {
 	user: User;
@@ -11,7 +12,7 @@ export interface Repository {
 	save(params: RepositoryParams): Promise<Result<null, Error>>;
 }
 
-export class SignUpCmd {
+export class SignUpCmd implements Cmd {
 	constructor(private repo: Repository) {
 		this.repo = repo;
 	}

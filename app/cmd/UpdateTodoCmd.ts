@@ -3,6 +3,7 @@ import type { Result } from "neverthrow";
 import type { Todo } from "../domain/todo";
 import { updateTodo } from "../domain/todo";
 import type { UpdateTodoParams } from "../domain/todo";
+import type { Cmd } from "./cmd";
 
 export type RepositoryParams = {
 	todo: { id: Todo["id"] } & Partial<Omit<Todo, "id">>;
@@ -12,7 +13,7 @@ export interface Repository {
 	save(params: RepositoryParams): Promise<Result<null, Error>>;
 }
 
-export class UpdateTodoCmd {
+export class UpdateTodoCmd implements Cmd {
 	constructor(private repo: Repository) {
 		this.repo = repo;
 	}

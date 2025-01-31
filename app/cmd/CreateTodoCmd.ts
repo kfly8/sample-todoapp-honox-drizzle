@@ -2,6 +2,7 @@ import { err, ok } from "neverthrow";
 import type { Result } from "neverthrow";
 import type { CreateTodoParams, Todo } from "../domain/todo";
 import { createTodo } from "../domain/todo";
+import type { Cmd } from "./cmd";
 
 export type RepositoryParams = {
 	todo: Todo;
@@ -11,7 +12,7 @@ export interface Repository {
 	save(params: RepositoryParams): Promise<Result<null, Error>>;
 }
 
-export class CreateTodoCmd {
+export class CreateTodoCmd implements Cmd {
 	constructor(private repo: Repository) {
 		this.repo = repo;
 	}
