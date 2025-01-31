@@ -12,7 +12,7 @@ export const todoSchema = z.object({
 	id: todoIdSchema,
 	title: z.string().min(1).max(100),
 	description: z.string().max(1000).optional(),
-	completed: z.boolean().optional(),
+	completed: z.boolean().default(false),
 	authorId: userIdSchema,
 	assigneeIds: z.array(userIdSchema).optional(),
 });
@@ -26,7 +26,6 @@ export function createTodo(params: CreateTodoParams) {
 		...params,
 		// default values
 		description: params.description ?? "",
-		completed: params.completed ?? false,
 		assigneeIds: params.assigneeIds ?? [],
 		id: createTodoId(),
 	};

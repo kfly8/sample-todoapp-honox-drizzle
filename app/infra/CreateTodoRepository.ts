@@ -35,9 +35,7 @@ async function saveTodo(
 	tx: TX,
 	data: Pick<Todo, "id" | "completed" | "title" | "description" | "authorId">,
 ) {
-	const { completed, ...rest } = data;
-	// transform undefined to false
-	await tx.insert(todos).values({ ...rest, completed: !!completed });
+	await tx.insert(todos).values(data);
 }
 
 async function saveTodoAssignees(
