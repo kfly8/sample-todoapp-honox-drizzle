@@ -13,7 +13,7 @@ export const createDatabase = () => {
 
 	db.exec(`
 		PRAGMA foreign_keys= 1;
-		PRAGMA journal_mode = WAL;
+		PRAGMA synchronous = NORMAL;
 	`);
 
 	return db;
